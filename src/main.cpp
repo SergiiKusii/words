@@ -3,6 +3,9 @@
 #include <iterator> 
 #include <boost/program_options.hpp>
 
+#include "wordslib/Parser.h"
+#include "wordslib/WordsInfo.h"
+
 struct Config
 {
     std::string words;
@@ -53,6 +56,16 @@ int main(int argc, char *argv[])
     try
     {
         auto cfg = ParseArguments(argc, argv);
+     
+        Parser parser;
+        auto words = parser.parse(cfg.words);
+        WordsInfo wordsinfo(words);
+
+        std::cout << "Words count: " << wordsinfo.getCount() << std::endl;
+        std::cout << "Max word: " << wordsinfo.getMaxWord() << std::endl;
+        std::cout << "Words count: " << wordsinfo.getCount() << std::endl;
+
+
     }
     catch (const boost::program_options::error &ex)
     {

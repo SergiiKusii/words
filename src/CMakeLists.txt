@@ -11,16 +11,8 @@ include(cmake/version.cmake)
 include(cmake/third_party.cmake)
 
 # include_directories(${SOURCE_DIR}/common)
-# include_directories(${SOURCE_DIR}/shadow)
-# include_directories(${SOURCE_DIR}/unhesher)
-# include_directories(${SOURCE_DIR}/render)
-# include_directories(${SOURCE_DIR}/cracker)
 
-# add_subdirectory(shadow)
-# add_subdirectory(unhesher)
-# add_subdirectory(render)
-# add_subdirectory(cracker)
-
+add_subdirectory(wordslib)
 add_subdirectory(tests)
 
 set (MAIN_SOURCES
@@ -29,9 +21,6 @@ set (MAIN_SOURCES
 
 add_executable (${PROJECT} ${MAIN_SOURCES})
 target_link_libraries(${PROJECT} ${Boost_LIBRARIES} )
-# target_link_libraries(${PROJECT} Shadow)
-# target_link_libraries(${PROJECT} Unhesher)
-# target_link_libraries(${PROJECT} Render)
-# target_link_libraries(${PROJECT} CrackerLib)
+target_link_libraries(${PROJECT} wordslib)
 
 set_target_properties(${PROJECT} PROPERTIES VERSION "${${PROJECT}_VERSION}" SOVERSION "0")
