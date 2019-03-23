@@ -6,9 +6,8 @@ project(${PROJECT})
 set(CMAKE_CXX_STANDARD 14)
 
 if (NOT CMAKE_BUILD_TYPE)
-  set(CMAKE_BUILD_TYPE Debug CACHE STRING "Choose the type of build, options are: Debug Release" FORCE)
+  set(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build, options are: Debug Release" FORCE)
 endif ()
-
 
 set(ROOT_DIR "${CMAKE_SOURCE_DIR}")
 set(BINARY_DIR  ${ROOT_DIR}/bin/${CMAKE_BUILD_TYPE})
@@ -22,11 +21,6 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${LIB_DIR}")
 # set (CMAKE_LIBRARY_PATH ${${PROJECT}_LIB_DIR})
 set (EXECUTABLE_OUTPUT_PATH ${BINARY_DIR})
 set (CMAKE_VERBOSE_MAKEFILE ON)
-
-set (ERR_NO_UNIX "Cannot build on non Unix systems")
-if (NOT CMAKE_COMPILER_IS_GNUCXX )
-    message (FATAL_ERROR ${ERR_NO_UNIX})
-endif ()
 
 enable_testing()
 

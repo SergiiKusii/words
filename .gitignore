@@ -1,4 +1,4 @@
-.vscode
+.vscode/ipch/
 build/
 bin/
 lib/

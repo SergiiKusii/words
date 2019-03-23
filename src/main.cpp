@@ -9,45 +9,33 @@
 struct Config
 {
     std::string words;
-    bool debug = false; 
 };
 
 Config ParseArguments(int argc, char *argv[])
 {
     using namespace boost::program_options;
     Config cfg;
-    try
-    {
-        options_description desc{"\
+
+    options_description desc{"\
 words - application for get info about set of words.\n\
 Copyright Sergii Kusii 2019.\n\n\
 Options"};
-        desc.add_options()
-            ("help,h", "Help screen")
-            ("words,w", value<std::string>(), "Set of words")
-            ("debug,d", "Show debug output");
+    desc.add_options()
+        ("help,h", "Help screen")
+        ("words,w", value<std::string>(), "Set of words");
 
-        variables_map vm;
-        store(parse_command_line(argc, argv, desc), vm);
-        notify(vm);
+    variables_map vm;
+    store(parse_command_line(argc, argv, desc), vm);
+    notify(vm);
 
-        if (vm.count("help") || !vm.count("words"))
-        {
-            std::cout << desc << '\n';
-            return cfg;
-        }
-                    
-        cfg.words = vm["words"].as<std::string>();
-        
-        cfg.debug = vm.count("debug") > 0;
-
+    if (vm.count("help") || !vm.count("words"))
+    {
+        std::cout << desc << '\n';
         return cfg;
     }
-    catch (const error &ex)
-    {
-        std::cerr << ex.what() << '\n';
-    }
-
+                
+    cfg.words = vm["words"].as<std::string>();
+        
     return cfg;
 }
 
@@ -56,16 +44,33 @@ int main(int argc, char *argv[])
     try
     {
         auto cfg = ParseArguments(argc, argv);
+        if (cfg.words.empty())
+        {
+            return 0;
+        }
      
         Parser parser;
         auto words = parser.parse(cfg.words);
         WordsInfo wordsinfo(words);
 
-        std::cout << "Words count: " << wordsinfo.getCount() << std::endl;
-        std::cout << "Max word: " << wordsinfo.getMaxWord() << std::endl;
-        std::cout << "Words count: " << wordsinfo.getCount() << std::endl;
+        std::cout << "Count: " << wordsinfo.getCount() << std::endl;
+        
+        auto frequency = wordsinfo.getFrequency();
+        std::cout << "Words: " <<  std::endl;
+        for (auto& pair : frequency)
+        {
+             std::cout << pair.first << " - " << pair.second <<  std::endl;
+        }
 
+        std::cout << "Longest: " << wordsinfo.getMaxWord() << std::endl;
+        
+        std::cout << "Most frequent: " << wordsinfo.getMostFrequentWord(frequency) << std::endl;
 
+        std::cout << "Reverse: ";
+        auto reverse = wordsinfo.getReverse();
+        std::copy(std::begin(reverse), std::end(reverse),
+              std::ostream_iterator<std::string>(std::cout, " ")); 
+        std::cout << std::endl;
     }
     catch (const boost::program_options::error &ex)
     {

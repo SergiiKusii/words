@@ -17,6 +17,8 @@ public:
     words_container_t getReverse() const;
     std::string getMaxWord() const;
     words_frequency_t getFrequency() const;
+    std::string getMostFrequentWord() const;
+    std::string getMostFrequentWord(const words_frequency_t& words) const;
 
 private:
     const words_container_t& m_words;

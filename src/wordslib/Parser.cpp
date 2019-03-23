@@ -9,21 +9,29 @@ words_container_t Parser::parse(const std::string& words)
 {
     words_container_t wordsContainer;
     size_t posBegin = 0;
-    while (posBegin != std::string::npos)
+    while (posBegin < words.size())
     {
-        auto posEnd = words.find(posBegin, g_delimiter);
+        //ignore all empty words and delimiters
+        if (words[posBegin] == g_delimiter)
+        {
+            posBegin++;
+            continue;
+        }
+
+        auto posEnd = words.find(g_delimiter, posBegin);
         if (posEnd == std::string::npos)
         {
-            posEnd = words.size() - 1;
+            posEnd = words.size();
         }
 
         if (posBegin < posEnd)
         {
-            wordsContainer.push_back(words.substr(posBegin, posEnd - posBegin));
+            auto word = words.substr(posBegin, posEnd - posBegin);
+            wordsContainer.emplace_back(word);
         }
 
-        posBegin = words.find(posEnd, g_delimiter);
+        posBegin = posEnd + 1;
     }
 
-    return words_container_t();
+    return wordsContainer;
 }
