@@ -13,8 +13,8 @@ words_container_t WordsInfo::getReverse() const
     std::reverse_copy(std::begin(m_words), std::end(m_words), std::begin(reserse));
     return reserse;
 }
-    
-std::string WordsInfo::getMaxWord() const
+
+std::string WordsInfo::getLongestWord() const
 {
     auto itMax = std::max_element(std::begin(m_words), std::end(m_words), 
             [](const std::string& ls, const std::string& rs) {
@@ -29,6 +29,7 @@ std::string WordsInfo::getMaxWord() const
     return *itMax;
 }
 
+/*return map where key is a word and value is the number of repetitions of that word*/
 words_frequency_t WordsInfo::getFrequency() const
 {
     words_frequency_t wordsFrequency;
@@ -44,6 +45,7 @@ words_frequency_t WordsInfo::getFrequency() const
             it->second++;
         }
     }
+    
     return wordsFrequency;
 }
 

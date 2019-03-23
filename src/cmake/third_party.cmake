@@ -1,5 +1,4 @@
 
-#boost 1.66 required
 set(Boost_USE_STATIC_LIBS ON)
 find_package(Boost REQUIRED COMPONENTS unit_test_framework program_options)
 if(Boost_FOUND)

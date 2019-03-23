@@ -18,7 +18,7 @@ Config ParseArguments(int argc, char *argv[])
 
     options_description desc{"\
 words - application for get info about set of words.\n\
-Copyright Sergii Kusii 2019.\n\n\
+Copyright (c) Sergii Kusii 2019.\n\n\
 Options"};
     desc.add_options()
         ("help,h", "Help screen")
@@ -62,7 +62,7 @@ int main(int argc, char *argv[])
              std::cout << pair.first << " - " << pair.second <<  std::endl;
         }
 
-        std::cout << "Longest: " << wordsinfo.getMaxWord() << std::endl;
+        std::cout << "Longest: " << wordsinfo.getLongestWord() << std::endl;
         
         std::cout << "Most frequent: " << wordsinfo.getMostFrequentWord(frequency) << std::endl;
 

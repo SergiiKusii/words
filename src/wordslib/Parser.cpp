@@ -30,6 +30,7 @@ words_container_t Parser::parse(const std::string& words)
             wordsContainer.emplace_back(word);
         }
 
+        //skip delimiter
         posBegin = posEnd + 1;
     }
 

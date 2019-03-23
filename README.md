@@ -1,8 +1,30 @@
 # words
-Some operations with words
+words - application for get info about set of words. <br />
+Options: <br />
+>  -h [ --help ]         Help screen <br />
+>  -w [ --words ] arg    Set of words <br />
 
-apt install cmake
-apt install build-essential
-apt install libboost-dev
-apt install libboost-test-dev
-apt install libboost-program-options-dev
+# build environment
+```
+apt install cmake build-essential \
+libboost-dev libboost-test-dev libboost-program-options-dev
+```
+
+# build
+```
+cd {project directory}
+mkdir build && cd build
+cmake ..
+make 
+make test
+```
+
+# run
+```
+cd {project directory}/Release/bin
+./words -w "It looks good!"
+```
+# run tests
+```
+{project directory}/run_tests.sh
+```

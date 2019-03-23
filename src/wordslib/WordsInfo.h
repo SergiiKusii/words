@@ -5,6 +5,7 @@
 
 using words_frequency_t = std::map<std::string /*word*/, size_t /*count*/>;
 
+/*return statistic about set of words*/
 class WordsInfo
 {
 public:
@@ -15,7 +16,7 @@ public:
 
     size_t getCount() const;
     words_container_t getReverse() const;
-    std::string getMaxWord() const;
+    std::string getLongestWord() const;
     words_frequency_t getFrequency() const;
     std::string getMostFrequentWord() const;
     std::string getMostFrequentWord(const words_frequency_t& words) const;
